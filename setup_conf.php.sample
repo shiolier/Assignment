@@ -1,0 +1,9 @@
+<?php
+
+// ディレクトリを絶対パスで指定
+return array(
+	'template_dir' => '/templates/',
+	'compile_dir' => '/templates_c/',
+	'config_dir' => '/configs/',
+	'cache_dir' => '/cache/',
+);
