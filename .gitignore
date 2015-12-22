@@ -1,4 +1,5 @@
 
 /vendor
 /setup_conf.php
-
+/cache/*
+/templates_c/*
