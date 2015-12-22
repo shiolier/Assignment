@@ -12,5 +12,8 @@ class Smarty_Assignment extends Smarty {
 		$this->compile_dir = $setup_conf['compile_dir'];
 		$this->config_dir = $setup_conf['config_dir'];
 		$this->cache_dir = $setup_conf['cache_dir'];
+
+		$this->assign('site_name', 'Assignment');
+		$this->assign('title', 'Assignment');
 	}
 }
