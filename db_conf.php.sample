@@ -1,0 +1,7 @@
+<?php
+
+// DBのユーザ名とパスワード
+return array(
+	'user_name' => 'user',
+	'password' => 'password',
+);

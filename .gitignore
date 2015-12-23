@@ -1,5 +1,6 @@
 
 /vendor
 /setup_conf.php
+/db_conf.php
 /cache/*
 /templates_c/*
