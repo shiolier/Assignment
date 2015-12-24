@@ -43,4 +43,21 @@ class Assigment_DB {
 		// 最初のカラム COUNT(*) を取得して、1だったらログイン成功
 		return $stmt->fetchColumn() == 1;
 	}
+
+	/**
+	 * 全記事取得(管理者用)
+	 * @return array 記事
+	 */
+	function get_all_article_for_admin() {
+		// 全行取得
+		$sql =  "SELECT id, title, LEFT(content, 100) AS content, publication_datetime FROM articles;";
+		$stmt = $this->dbh->prepare($sql);
+		$stmt->execute();
+
+		$articles = array();
+		while ($article = $stmt->fetch(PDO::FETCH_ASSOC)) {
+			$articles[] = $article;
+		}
+		return $articles;
+	}
 }
