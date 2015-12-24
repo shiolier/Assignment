@@ -3,7 +3,12 @@
 require_once("vendor/autoload.php");
 
 class Smarty_Assignment extends Smarty {
-	function __construct() {
+
+	/**
+	 * コンストラクタ
+	 * @param $title HTMLのtitleタグに挿入するタイトル
+	 */
+	function __construct($title = 'Assignment') {
 		parent::__construct();
 
 		// Smartyが使用するディレクトリの設定
@@ -14,6 +19,15 @@ class Smarty_Assignment extends Smarty {
 		$this->cache_dir = $setup_conf['cache_dir'];
 
 		$this->assign('site_name', 'Assignment');
-		$this->assign('title', 'Assignment');
+		$this->assign('title', $title);
+	}
+
+	/**
+	 * ベーステンプレートにコンテンツテンプレートを挿入したものを表示
+	 * @param $content_tpl_name コンテンツのテンプレート名
+	 */
+	function displayBase($content_tpl_name) {
+		$this->assign('content_tpl', $content_tpl_name);
+		$this->display('base.tpl');
 	}
 }
