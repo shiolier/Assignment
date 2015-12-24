@@ -17,4 +17,30 @@ class Assigment_DB {
 	function __destruct() {
 		$this->dbh = null;
 	}
+
+	/**
+	 * ログイン
+	 * @param $user_id ユーザーID
+	 * @param $password パスワード
+	 * @return boolean ログイン成功かどうか
+	 */
+	function login($user_id = '', $password = '') {
+		if ($user_id === '' || $password === '') {
+			return false;
+		}
+
+		// パスワードをハッシュ
+		$password_hash = password_hash($password, PASSWORD_BCRYPT, array('salt' => sha1('hashsalt')));
+
+		// ユーザーIDとパスワードが一致する行数を取得
+		$sql = "SELECT COUNT(*) FROM users WHERE user_id = :user_id AND password = :password;";
+		$stmt = $this->dbh->prepare($sql);
+
+		$stmt->bindValue(':user_id', $user_id, PDO::PARAM_STR);
+		$stmt->bindValue(':password', $password_hash, PDO::PARAM_STR);
+		$stmt->execute();
+
+		// 最初のカラム COUNT(*) を取得して、1だったらログイン成功
+		return $stmt->fetchColumn() == 1;
+	}
 }
