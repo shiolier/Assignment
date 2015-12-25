@@ -60,4 +60,25 @@ class Assigment_DB {
 		}
 		return $articles;
 	}
+
+	/**
+	 * 記事の挿入(新規作成)
+	 * @param $title 記事のタイトル
+	 * @param $content 記事の内容
+	 * @param publication_datetime 記事の公開日時
+	 * @return boolean 新規作成が成功したかどうか
+	 */
+	function insert_new_article($title, $content, $publication_datetime) {
+		// 挿入
+		$sql = "INSERT INTO articles(title, content, publication_datetime) VALUES (:title, :content, :publication_datetime);";
+		$stmt = $this->dbh->prepare($sql);
+
+		$stmt->bindValue(':title', $title, PDO::PARAM_STR);
+		$stmt->bindValue(':content', $content, PDO::PARAM_STR);
+		$stmt->bindValue(':publication_datetime', $publication_datetime);
+		$stmt->execute();
+
+		// 1件挿入できてたら成功
+		return $stmt->rowCount() === 1;
+	}
 }
