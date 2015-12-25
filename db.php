@@ -50,7 +50,7 @@ class Assigment_DB {
 	 */
 	function get_all_article_for_admin() {
 		// 全行取得
-		$sql =  "SELECT id, title, LEFT(content, 100) AS content, publication_datetime FROM articles;";
+		$sql =  "SELECT id, title, LEFT(content, 100) AS content, publication_datetime FROM articles ORDER BY id DESC;";
 		$stmt = $this->dbh->prepare($sql);
 		$stmt->execute();
 
@@ -79,6 +79,44 @@ class Assigment_DB {
 		$stmt->execute();
 
 		// 1件挿入できてたら成功
+		return $stmt->rowCount() === 1;
+	}
+
+	/**
+	 * 1つの記事を取得
+	 * @param $id 取得したい記事のID
+	 * @return array 記事の連想配列
+	 */
+	function get_one_article($id = 0) {
+		// IDが一致する行を取得
+		$sql = "SELECT * FROM articles WHERE id = :id;";
+		$stmt = $this->dbh->prepare($sql);
+
+		$stmt->bindValue(':id', $id, PDO::PARAM_INT);
+		$stmt->execute();
+
+		return $stmt->fetch(PDO::FETCH_ASSOC);
+	}
+
+	/**
+	 * 記事を更新
+	 * @param $title 記事のタイトル
+	 * @param $content 記事の内容
+	 * @param $publication_datetime 記事の公開日時
+	 * @return boolean 更新が成功したかどうか
+	 */
+	function update_article($id = 0, $title, $content, $publication_datetime) {
+		// IDが一致する行を更新
+		$sql = "UPDATE articles SET title = :title, content = :content, publication_datetime = :publication_datetime WHERE id = :id;";
+		$stmt = $this->dbh->prepare($sql);
+
+		$stmt->bindValue(':id', $id, PDO::PARAM_INT);
+		$stmt->bindValue(':title', $title, PDO::PARAM_STR);
+		$stmt->bindValue(':content', $content, PDO::PARAM_STR);
+		$stmt->bindValue(':publication_datetime', $publication_datetime);
+		$stmt->execute();
+
+		// 1件更新できてたら成功
 		return $stmt->rowCount() === 1;
 	}
 }

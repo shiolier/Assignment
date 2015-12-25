@@ -25,8 +25,8 @@
 					{$article.publication_datetime}
 				</td>
 				<td>
-					<a href="edit_article.php?p={$article.id}">編集</a>
-					<a href="delete_article.php?p={$article.id}">削除</a>
+					<a href="edit_article.php?id={$article.id}">編集</a>
+					<a href="delete_article.php?id={$article.id}">削除</a>
 				</td>
 			</tr>
 		{/foreach}
