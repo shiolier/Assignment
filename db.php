@@ -119,4 +119,21 @@ class Assigment_DB {
 		// 1件更新できてたら成功
 		return $stmt->rowCount() === 1;
 	}
+
+	/**
+	 * 記事を削除
+	 * @param $id 削除したい記事のID
+	 * @return boolean 削除が成功したかどうか
+	 */
+	function delete_article($id = 0) {
+		// IDが一致する行を削除
+		$sql = "DELETE FROM articles WHERE id = :id;";
+		$stmt = $this->dbh->prepare($sql);
+
+		$stmt->bindValue(':id', $id, PDO::PARAM_INT);
+		$stmt->execute();
+
+		// 1件削除できてたら成功
+		return $stmt->rowCount() === 1;
+	}
 }
