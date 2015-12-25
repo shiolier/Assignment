@@ -4,7 +4,7 @@ require_once('is_login.php');
 
 // Smarty読み込み&準備
 require_once('../../setup.php');
-$smarty = new Smarty_Assignment('Assignment | Admin');
+$smarty = new Smarty_Assignment('Assignment | 管理者ページ');
 
 require_once('../../db.php');
 $db = null;

@@ -4,7 +4,7 @@ require_once('is_login.php');
 
 // Smarty読み込み&準備
 require_once('../../setup.php');
-$smarty = new Smarty_Assignment('Assignment | 新規作成');
+$smarty = new Smarty_Assignment('Assignment | 記事編集');
 $smarty->assign('is_new', false);
 $smarty->assign('error_message', '');
 $smarty->assign('error_title', '');
