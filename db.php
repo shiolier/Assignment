@@ -29,8 +29,9 @@ class Assigment_DB {
 			return false;
 		}
 
+		$db_conf = require('db_conf.php');
 		// パスワードをハッシュ
-		$password_hash = password_hash($password, PASSWORD_BCRYPT, array('salt' => sha1('hashsalt')));
+		$password_hash = crypt($password, $db_conf['crypt_salt_prefix'] . $db_conf['hash_salt']);
 
 		// ユーザーIDとパスワードが一致する行数を取得
 		$sql = "SELECT COUNT(*) FROM users WHERE user_id = :user_id AND password = :password;";
