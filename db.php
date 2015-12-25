@@ -45,6 +45,23 @@ class Assigment_DB {
 	}
 
 	/**
+	 * 全記事取得(一般ユーザー用)
+	 * @return array 記事
+	 */
+	function get_all_article() {
+		// 公開日時が現在より前の記事を取得
+		$sql =  "SELECT id, title, LEFT(content, 100) AS content, publication_datetime FROM articles WHERE publication_datetime < CURRENT_TIMESTAMP ORDER BY publication_datetime DESC;";
+		$stmt = $this->dbh->prepare($sql);
+		$stmt->execute();
+
+		$articles = array();
+		while ($article = $stmt->fetch(PDO::FETCH_ASSOC)) {
+			$articles[] = $article;
+		}
+		return $articles;
+	}
+
+	/**
 	 * 全記事取得(管理者用)
 	 * @return array 記事
 	 */
