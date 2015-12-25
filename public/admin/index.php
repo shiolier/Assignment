@@ -19,6 +19,11 @@ try {
 
 // 記事一覧取得
 $articles = $db->get_all_article_for_admin();
+$tmp_articles = array();
+foreach ($articles as $article) {
+	$article['content'] = strip_tags($article['content']);
+	$tmp_articles[] = $article;
+}
 
-$smarty->assign('articles', $articles);
+$smarty->assign('articles', $tmp_articles);
 $smarty->displayBase('admin/index.tpl');
