@@ -18,9 +18,9 @@
 		{$error_message}
 	</p>
 	{$error_title}<br>
-	タイトル:<input type="text" name="title" value="{$article_title|escape:'htmlall'}"><br>
+	タイトル:<input type="text" name="title" value="{$article_title|escape:'html'}"><br>
 	{$error_content}<br>
-	内容:<textarea name="content" width="500px" height="300px">{$article_content|escape:'htmlall'}</textarea><br>
+	内容:<textarea name="content" width="500px" height="300px">{$article_content|escape:'html'}</textarea><br>
 	{$error_publication_date}<br>
 	表示開始日:<input type="text" name="publication_date" id="publication_date" value="{$publication_date}"><br>
 	{$error_publication_time}<br>

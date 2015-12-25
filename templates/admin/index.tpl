@@ -16,10 +16,10 @@
 					{$article.id}
 				</td>
 				<td>
-					{$article.title|escape:'htmlall'}
+					{$article.title|escape:'html'}
 				</td>
 				<td>
-					{$article.content|escape:'htmlall'}
+					{$article.content|escape:'html'}
 				</td>
 				<td>
 					{$article.publication_datetime}
