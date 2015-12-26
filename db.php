@@ -214,4 +214,21 @@ class Assigment_DB {
 		// 1件挿入できてたら成功
 		return $stmt->rowCount() === 1;
 	}
+
+	/**
+	 * コメントを削除
+	 * @param $id 削除したいコメントのID
+	 * @return boolean 削除が成功したかどうか
+	 */
+	function delete_comment($id = 0) {
+		// IDが一致する行を削除
+		$sql = "DELETE FROM comments WHERE id = :id;";
+		$stmt = $this->dbh->prepare($sql);
+
+		$stmt->bindValue(':id', $id, PDO::PARAM_INT);
+		$stmt->execute();
+
+		// 1件削除できてたら成功
+		return $stmt->rowCount() === 1;
+	}
 }
