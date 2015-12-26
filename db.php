@@ -154,4 +154,23 @@ class Assigment_DB {
 		// 1件削除できてたら成功
 		return $stmt->rowCount() === 1;
 	}
+
+	/**
+	 * 記事に投稿されたコメント一覧を取得
+	 * @param $article_id コメント一覧を取得したい記事のID
+	 * @return 指定した記事に投稿されたコメント一覧
+	 */
+	function get_comments_by_article_id($article_id = 0) {
+		$sql = "SELECT * FROM comments WHERE article_id = :article_id;";
+		$stmt = $this->dbh->prepare($sql);
+
+		$stmt->bindValue(':article_id', $article_id, PDO::PARAM_INT);
+		$stmt->execute();
+
+		$comments = array();
+		while ($comment = $stmt->fetch(PDO::FETCH_ASSOC)) {
+			$comments[] = $comment;
+		}
+		return $comments;
+	}
 }
