@@ -25,6 +25,7 @@
 					{$article.publication_datetime}
 				</td>
 				<td>
+					<a href="delete_comment.php?id={$article.id}">コメント</a>
 					<a href="edit_article.php?id={$article.id}">編集</a>
 					<a href="delete_article.php?id={$article.id}">削除</a>
 				</td>

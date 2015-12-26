@@ -154,4 +154,81 @@ class Assigment_DB {
 		// 1件削除できてたら成功
 		return $stmt->rowCount() === 1;
 	}
+
+	/**
+	 * 記事が存在するかどうかを確認
+	 * @param $id 確認したい記事のID
+	 * @param $public 公開済みかどうかも確認。trueにした場合、記事自体が存在していても公開されていなければ存在しないものとする。
+	 * @return boolean 記事が存在するかどうか
+	 */
+	function is_exist_article($id = 0, $public = false) {
+		$sql = "SELECT COUNT(*) FROM articles WHERE id = :id";
+		if ($public === true) {
+			$sql .= " AND publication_datetime < CURRENT_TIMESTAMP";
+		}
+		$stmt = $this->dbh->prepare($sql);
+
+		$stmt->bindValue(':id', $id, PDO::PARAM_INT);
+		$stmt->execute();
+
+		// 最初のカラム COUNT(*) を取得して、1だったらログイン成功
+		return $stmt->fetchColumn() == 1;
+	}
+
+	/**
+	 * 記事に投稿されたコメント一覧を取得
+	 * @param $article_id コメント一覧を取得したい記事のID
+	 * @return 指定した記事に投稿されたコメント一覧
+	 */
+	function get_comments_by_article_id($article_id = 0) {
+		$sql = "SELECT * FROM comments WHERE article_id = :article_id;";
+		$stmt = $this->dbh->prepare($sql);
+
+		$stmt->bindValue(':article_id', $article_id, PDO::PARAM_INT);
+		$stmt->execute();
+
+		$comments = array();
+		while ($comment = $stmt->fetch(PDO::FETCH_ASSOC)) {
+			$comments[] = $comment;
+		}
+		return $comments;
+	}
+
+	/**
+	 * コメントを挿入
+	 * @param $article_id コメントを投稿する記事のID
+	 * @param $name ハンドルネーム
+	 * @param $content コメントの内容
+	 * @return boolean コメントの挿入に成功したかどうか
+	 */
+	function insert_comment($article_id = 0, $name, $content) {
+		// 挿入
+		$sql = "INSERT INTO comments(article_id, name, content, created_at) VALUES (:article_id, :name, :content, CURRENT_TIMESTAMP);";
+		$stmt = $this->dbh->prepare($sql);
+
+		$stmt->bindValue(':article_id', $article_id, PDO::PARAM_INT);
+		$stmt->bindValue(':name', $name, PDO::PARAM_STR);
+		$stmt->bindValue(':content', $content, PDO::PARAM_STR);
+		$stmt->execute();
+
+		// 1件挿入できてたら成功
+		return $stmt->rowCount() === 1;
+	}
+
+	/**
+	 * コメントを削除
+	 * @param $id 削除したいコメントのID
+	 * @return boolean 削除が成功したかどうか
+	 */
+	function delete_comment($id = 0) {
+		// IDが一致する行を削除
+		$sql = "DELETE FROM comments WHERE id = :id;";
+		$stmt = $this->dbh->prepare($sql);
+
+		$stmt->bindValue(':id', $id, PDO::PARAM_INT);
+		$stmt->execute();
+
+		// 1件削除できてたら成功
+		return $stmt->rowCount() === 1;
+	}
 }
