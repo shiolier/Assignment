@@ -20,3 +20,11 @@
 		</li>
 	{/foreach}
 </ul>
+
+<form action="post_comment.php" method="POST">
+	コメント投稿<br>
+	ハンドルネーム:<input type="text" name="name" placeholder="名無しさん"><br>
+	内容:<textarea name="content"></textarea><br>
+	<input type="hidden" name="article_id" value="{$article.id}">
+	<input type="submit" value="投稿">
+</form>
