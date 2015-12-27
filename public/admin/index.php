@@ -1,5 +1,7 @@
 <?php
 
+require_once('../../session.php');
+
 require_once('is_login.php');
 
 // Smarty読み込み&準備
@@ -22,6 +24,9 @@ $articles = $db->get_all_article_for_admin();
 $tmp_articles = array();
 foreach ($articles as $article) {
 	$article['content'] = strip_tags($article['content']);
+	$publication_unixtimestamp = strtotime($article['publication_datetime']);
+	$article['publication_date'] = date('Y/m/d', $publication_unixtimestamp);
+	$article['publication_time'] = date('H:i', $publication_unixtimestamp);
 	$tmp_articles[] = $article;
 }
 

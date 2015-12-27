@@ -1,13 +1,13 @@
 <?php
 
+require_once('../../session.php');
+
 // 管理者ページへのリダイレクト関数
 function redirect_admin_page() {
 	header('HTTP/1.1 303 See Other');
 	header('Location: ./');
 	exit();
 }
-
-session_start();
 
 // ログイン済みの場合は管理者ページへ
 if (isset($_SESSION['login']) && $_SESSION['login']) {

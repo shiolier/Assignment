@@ -20,6 +20,8 @@ class Smarty_Assignment extends Smarty {
 
 		$this->assign('site_name', 'Assignment');
 		$this->assign('title', $title);
+
+		$this->assign('login', $_SESSION['login']);
 	}
 
 	/**

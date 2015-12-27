@@ -1,5 +1,7 @@
 <?php
 
+require_once('../../session.php');
+
 require_once('is_login.php');
 
 require_once('../../setup.php');
