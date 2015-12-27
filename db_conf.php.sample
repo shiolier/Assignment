@@ -1,0 +1,12 @@
+<?php
+
+// DBのユーザ名とパスワード
+return array(
+	'user_name' => 'user',
+	'password' => 'password',
+
+	// cryptの第2引数saltのプリフィクス
+	'crypt_salt_prefix' => '$2y$10$',
+	// パスワードハッシュ用のソルト
+	'hash_salt' => 'abcdefghijklmnopqrstuvwxyz',
+);
