@@ -12,21 +12,45 @@
 	});
 </script>
 
-<h3>記事</h3>
 <form method="POST">
-	<p>
-		{$error_message}
-	</p>
-	{$error_title}<br>
-	タイトル:<input type="text" name="title" value="{$article_title|escape:'html'}"><br>
-	{$error_content}<br>
-	内容:<textarea name="content" width="500px" height="300px">{$article_content|escape:'html'}</textarea><br>
-	{$error_publication_date}<br>
-	表示開始日:<input type="text" name="publication_date" id="publication_date" value="{$publication_date}"><br>
-	{$error_publication_time}<br>
-	表示開始時刻:<input type="text" name="publication_time" id="publication_time" value="{$publication_time}"><br>
 	{if $is_new == false}
 		<input type="hidden" name="id" value="{$article_id}">
 	{/if}
-	<input type="submit" value="保存">
+	<table class="edit_article_form_table">
+		<caption>記事</caption>
+		<tr>
+			<td colspan="2" class="error_message">{$error_message}</td>
+		</tr>
+		<tr>
+			<td colspan="2" class="error_message">{$error_title}</td>
+		</tr>
+		<tr>
+			<td>タイトル:</td>
+			<td><input class="title_form" type="text" name="title" value="{$article_title|escape:'html'}"></td>
+		</tr>
+		<tr>
+			<td colspan="2" class="error_message">{$error_content}</td>
+		</tr>
+		<tr>
+			<td>内容:</td>
+			<td><textarea name="content" width="500px" height="300px">{$article_content|escape:'html'}</textarea></td>
+		</tr>
+		<tr>
+			<td colspan="2" class="error_message">{$error_publication_date}</td>
+		</tr>
+		<tr>
+			<td>表示開始日:</td>
+			<td><input type="text" name="publication_date" id="publication_date" value="{$publication_date}"></td>
+		</tr>
+		<tr>
+			<td colspan="2" class="error_message">{$error_publication_time}</td>
+		</tr>
+		<tr>
+			<td>表示開始時刻:</td>
+			<td><input type="text" name="publication_time" id="publication_time" value="{$publication_time}"></td>
+		</tr>
+		<tr>
+			<td colspan="2" class="submit"><input type="submit" class="submit_button" value="保存"></td>
+		</tr>
+	</table>
 </form>

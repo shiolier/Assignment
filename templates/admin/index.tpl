@@ -1,8 +1,8 @@
 <div>
-	<a href="new_article.php">新規作成</a>
+	<a class="button" href="new_article.php">新規作成</a>
 </div>
 <div>
-	<table border="1">
+	<table class="article_list_table" border="1">
 		<tr>
 			<th>ID</th>
 			<th>タイトル</th>
@@ -22,7 +22,7 @@
 					{$article.content|escape:'html'}
 				</td>
 				<td>
-					{$article.publication_datetime}
+					{$article.publication_date} {$article.publication_time}
 				</td>
 				<td>
 					<a href="delete_comment.php?id={$article.id}">コメント</a>

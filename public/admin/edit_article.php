@@ -1,5 +1,7 @@
 <?php
 
+require_once('../../session.php');
+
 require_once('is_login.php');
 
 // Smarty読み込み&準備

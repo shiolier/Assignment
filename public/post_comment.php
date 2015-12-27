@@ -1,5 +1,7 @@
 <?php
 
+require_once('../session.php');
+
 require_once('../db.php');
 $db = null;
 try {

@@ -1,5 +1,7 @@
 <?php
 
+require_once('../session.php');
+
 // Smarty読み込み&準備
 require_once('../setup.php');
 $smarty = new Smarty_Assignment('Assignment');
